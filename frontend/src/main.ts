@@ -111,13 +111,6 @@ const changeImg = (data:PizzaResponse, id:number) => {
   }
 }
 
-/* const changeImg = (data:PizzaResponse, id:number) => {
-
-  for(let i = 0; i<data.length; i++){
-    if(id===data[i].id)
-      return image.src= data[i].url
-  }
-} */
 
 // PIZZA CHOICES:
 margherita.addEventListener("click", async load => {

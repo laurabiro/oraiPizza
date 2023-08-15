@@ -7,12 +7,10 @@ import { z } from "zod"
 
 /* const fileUpload = require("express-fileupload"); */
 const server = express()
-const app = express()
 server.use(cors())
-/* 
-app.use(fileUpload()) */
-
-app.use(express.static('database'))
+/* app.use(fileUpload()) */
+/* app.use("/database/pictures", express.static("dist/assets")) */
+server.use(express.static("database"))
 
 const PizzaSchema = z.object ({
 
@@ -38,9 +36,6 @@ server.get("/", async (req: Request, res: Response) => {
  
 })
 
-
-
-/* app.use("/database/pictures", express.static("dist/assets")) */
 
 
 server.listen(3333) 
