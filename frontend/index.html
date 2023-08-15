@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="dist/mario.svg"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Order Pizza</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Grandstander:wght@900&family=Space+Mono&display=swap" rel="stylesheet">
+  </head>
+  <body>
+
+    <h1>MARIO's GRANDMA</h1>
+
+    <div id="container">
+
+      <div id="pizza-list">
+
+        <ul id="list">
+          <p id="margherita">Margherita</p>
+          <p id="quattro">Quattro Formaggi</p>
+          <p id="funghi">Funghi</p>
+          <p id="pepperoni">Pepperoni</p>
+          <p id="capricciose">Capricciose</p>
+          <p id="grandmas">Grandma's</p>
+          <p id="neapolitan">Neapolitan</p>
+        </ul>
+
+      </div>
+
+
+      <div id="change-pizzas" class="change">
+
+        <div id="pizza-card">
+
+          <div id="pizza-style">
+            <h2 id="name" class="name" ></h2>
+            <p id="top" class="toppings">toppings</p>
+            <ul id="toppings">
+            </ul>
+          </div>
+
+          <div id="pizza-img">
+            <img id="img" src="" alt="">
+          </div>
+
+        </div>
+
+        <div id="input-field">
+          <div></div>
+          <input type="number" min="0" name="number" id="number">
+          <button id="add-to-order">ADD TO ORDER</button>
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+
+
+
+
+    <div id="order-field">
+
+      <div id="ordered-pizzas">
+        <p id="yp">Your Pizzas</p>
+        <p id="yp-description">...</p>
+        <i></i>
+      </div>
+
+      <input id="name" type="text" placeholder="your name">
+      <input id="zip" type="text" placeholder="zip code">
+      <input id="city" type="text" placeholder="city">
+      <input id="street" type="text" placeholder="street name">
+      <input id="house" type="text" placeholder="house number">
+      <input id="phone" type="text" placeholder="phone number">
+      <input id="email" type="text" placeholder="email address">
+
+      <button>SEND ORDER</button>
+
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+
+  </body>
+</html>

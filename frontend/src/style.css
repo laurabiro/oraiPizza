@@ -1,0 +1,176 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* --- Reset --- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+}
+
+html {
+  color-scheme: dark light;
+}
+
+body {
+  min-height: 100vh;
+}
+
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+/* --- Reset --- */
+
+/* --- Variables --- */
+:root {
+  --bg-img-layer: -10;
+  --nav-layer: 10;
+}
+/* --- Variables --- */
+
+body {
+  background-image: url(https://static.vecteezy.com/system/resources/previews/000/966/017/original/various-pizzas-set-vector.jpg);
+  background-position: center left;
+  background-color: rgb(255, 217, 160);
+  padding: 50px 40px;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+* {
+  color: black;
+}
+
+h1 {
+  font-family: 'Grandstander', cursive;
+  line-height: 65px;
+  -webkit-text-fill-color: rgb(243, 44, 44);
+  -webkit-text-stroke: 4px;
+  text-shadow: 5px 2px 3px black;
+  color: rgba(0, 0, 0, 0.9);
+  align-self: center;
+  justify-self: center;
+  text-align: center;
+  font-size: 120px;
+  font-weight: 900;
+  letter-spacing: 5px;
+  border-radius: 0.1em;
+}
+
+#container {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 100px;
+  margin-top: 50px;
+}
+
+#list {
+  display: flex;
+  flex-direction: column;
+  
+}
+#list p{
+  margin: 20px;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  cursor: pointer;
+}
+
+
+
+#change-pizzas {
+  background-color: rgba(0,0,0,0.85);
+  border-radius: 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 15px;
+
+}
+
+#pizza-card {
+  display: flex;
+  justify-content: space-around;
+}
+#pizza-style h2 {
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  color: rgb(233, 227, 227);
+  text-shadow: 3px 3px 3px black;
+}
+.toppings {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: rgb(233, 227, 227);
+  text-shadow: 3px 3px 3px black;
+}
+#img {
+  width: 470px;
+  border-radius: 0.2em;
+  border: rgb(233, 227, 227) solid 3px;
+  margin-left: 30px;
+}
+
+#input-field {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 30px;
+}
+
+#input-field div {
+  width: 300px;
+}
+#number {
+  background-color: rgb(235, 229, 229);
+  width: 80px;
+  border-radius: 0.2em;
+  border:rgba(37, 17, 3, 0.8) solid 1px;
+  font-size: 30px;
+  text-align: center;
+  position: relative;
+  margin-right: 20px;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  background: rgb(233, 227, 227);
+  margin: 4px 3px;
+  color-scheme: light;
+  box-shadow: 0 0 2px rgb(40, 2, 2);
+}
+#add-to-order {
+  color:black;
+  background-color:  rgb(192, 18, 18);
+  -webkit-text-fill-color:rgb(233, 227, 227);
+  -webkit-text-stroke: 1px;
+  border-radius: 0.2em;
+  padding: 10px 20px;
+  letter-spacing: 3px;
+  font-weight: 900;
+  font-size: 24px;
+  text-shadow: 4px 4px 8px black;
+}
+li {
+  margin-left: 5px;
+  color: rgb(233, 227, 227);
+}
+
+
+#order-field {
+  display: none;
+}
