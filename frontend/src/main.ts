@@ -3,13 +3,7 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 import { z } from "zod";
 
 //PIZZA CHOICES:
-const margherita = document.getElementById("margherita") as HTMLParagraphElement
-const funghi = document.getElementById("funghi") as HTMLParagraphElement
-const quattroFormaggi = document.getElementById("quattro") as HTMLParagraphElement
-const pepperoni = document.getElementById("pepperoni") as HTMLParagraphElement
-const capricciose = document.getElementById("capricciose") as HTMLParagraphElement
-const grandmas = document.getElementById("grandmas") as HTMLParagraphElement
-const neapolitan = document.getElementById("neapolitan") as HTMLParagraphElement
+const pizzas = document.getElementsByClassName("pizza") as HTMLCollectionOf<HTMLParagraphElement>
 //CHANGES ON THE CARD:
 const changePizzas = document.getElementById("change-pizzas") as HTMLDivElement
 const name = document.getElementById("name") as HTMLHeadingElement
@@ -18,13 +12,26 @@ const image = document.getElementById("img") as HTMLImageElement
 //ACTIONS:
 const number = document.getElementById("number") as HTMLInputElement
 const addToOrder = document.getElementById("add-to-order") as HTMLButtonElement
-//ORDER FIELD:
+//ORDER DETAILS:
+const details = document.getElementById("order-field") as HTMLDivElement
+const orderedPizzas = document.getElementById("yp-description") as HTMLUListElement
+const listedPizzas = document.getElementsByClassName("ordered") as HTMLCollectionOf<HTMLLIElement>
+//ORDER INPUTS:
+const orderName = document.getElementById("name2") as HTMLInputElement
+const orderZip = document.getElementById("zip") as HTMLInputElement
+const orderCity = document.getElementById("city") as HTMLInputElement
+const orderStreet = document.getElementById("street") as HTMLInputElement
+const orderHouse = document.getElementById("house") as HTMLInputElement
+const orderPhone = document.getElementById("phone") as HTMLInputElement
+const orderEmail = document.getElementById("email") as HTMLInputElement
+//ORDER BUTTON:
+const orderButton = document.getElementById("so-button") as HTMLButtonElement
 
-
-
-// CARD TOGGLE:
+// DISPLAY NONES:
 changePizzas.style.display = "none"
+details.style.display = "none"
 
+//CARD TOGGLE:
 function toggle(pizzaId:number | null) {
   let currentPizzaId = null
   const x = changePizzas
@@ -38,14 +45,6 @@ function toggle(pizzaId:number | null) {
     x.style.display = "none"
   }
 }
-/* function toggle() {
-  const x = document.getElementById("change-pizzas") as HTMLDivElement;
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
-  }
-} */
 
 // DATA ZOD:
 const PizzaResponseScheme = z.object({
@@ -68,7 +67,6 @@ const getData = async () => {
   return response;
 }
 
-
 // CHANGES ON THE CARD:
 const changeName = (data:PizzaResponse, id:number) => {
 
@@ -78,7 +76,6 @@ const changeName = (data:PizzaResponse, id:number) => {
   }
 }
 const changeToppings = (data:PizzaResponse, id:number) => {
-  
   let i = 0
   while(data[i] !== undefined){
     toppings.innerHTML = ""
@@ -86,13 +83,7 @@ const changeToppings = (data:PizzaResponse, id:number) => {
     if(id===data[i].id){
       let j = 0
       while(data[i].toppings[j] !== undefined){
-      
-       toppings.innerHTML += `<li>${data[i].toppings[j]}</li>`
-       
-        /*    let li = document.createElement("li")
-        let text = document.createTextNode(`${data[i].toppings[j]}`)
-        li.appendChild(text)
-        toppings.appendChild(li) */
+        toppings.innerHTML += `<li>${data[i].toppings[j]}</li>`
 
         j++
       }
@@ -100,7 +91,6 @@ const changeToppings = (data:PizzaResponse, id:number) => {
     }  
     i++
   }
-
 }
 const changeImg = (data:PizzaResponse, id:number) => {
   console.log("done")
@@ -111,155 +101,81 @@ const changeImg = (data:PizzaResponse, id:number) => {
   }
 }
 
+const pizzaListener = async (event:MouseEvent) => {
+  //console.log(event)
+  //console.log((event.target as HTMLParagraphElement).id) */
+  let response = await getData()
+  if(!response){
+    return 400
+  }
+  
+  const result = PizzaResponseScheme.safeParse(response.data)
+
+  if (!result.success) {
+    console.log(result.error)
+    return 404
+  }
+
+  number.value = "1"
+  changeName(result.data, +(event.target as HTMLParagraphElement).id)
+  changeToppings(result.data, +(event.target as HTMLParagraphElement).id)
+  changeImg(result.data, +(event.target as HTMLParagraphElement).id)
+  toggle(+(event.target as HTMLParagraphElement).id)
+}
 
 // PIZZA CHOICES:
-margherita.addEventListener("click", async load => {
-  let response = await getData()
-  if(!response){
-    return 400
+for (let i = 0; i < pizzas.length; i++) {
+  const element = pizzas[i]
+  element.addEventListener("click", pizzaListener)
+}
+// ORDER DETAILS:
+function loadDetails() {
+  if (details.style.display === "none") {
+    details.style.display = "block"
+  }
+
+  orderedPizzas.innerHTML += `<li class="ordered"> ${+number.value}  x  ${name.innerHTML} </li>`
+}
+
+addToOrder.addEventListener("click", loadDetails)
+
+// SAVE ORDER:
+
+const getDetails = () => {
+  let i = 0
+  let result:string[] = []
+  while(listedPizzas[i] !== undefined){
+    result = [...result, listedPizzas[i].innerHTML]
+    i++
+  }
+  return result
+}
+const date = new Date().toUTCString();
+console.log(date)
+orderButton.addEventListener("click", async function() {
+  const order = {
+    "ordered pizzas":getDetails(),
+    "name":orderName.value,
+    "zip code":orderZip.value,
+    "city":orderCity.value,
+    "street":orderStreet.value,
+    "house number":orderHouse.value,
+    "phone number":orderPhone.value,
+    "email":orderEmail.value,
+    "date":date
+  }
+
+  try {
+    const config = {
+      method: "POST",
+      body: JSON.stringify(order),
+      
+    }
+    console.dir(config)
+    const response = await axios.post('http://localhost:3333/', order)
+    console.log('Data sent successfully:', response.data)
+  } catch (error) {
+    console.error('Error sending data:', error)
   }
   
-  const result = PizzaResponseScheme.safeParse(response.data);
-
-  if (!result.success) {
-    console.log(result.error);
-    return 404;
-  }
-
-  changeName(result.data, 1)
-  changeToppings(result.data, 1)
-  changeImg(result.data, 1)
-  toggle(1)
 })
-
-quattroFormaggi.addEventListener("click", async load => {
-  let response = await getData()
-  if(!response){
-    return 400
-  }
-  
-  const result = PizzaResponseScheme.safeParse(response.data);
-
-  if (!result.success) {
-    console.log(result.error);
-    return 404;
-  }
-
-  changeName(result.data, 2)
-  changeToppings(result.data, 2)
-  changeImg(result.data, 2)
-  toggle(2)
-})
-
-funghi.addEventListener("click", async load => {
-  let response = await getData()
-  if(!response){
-    return 400
-  }
-  
-  const result = PizzaResponseScheme.safeParse(response.data);
-
-  if (!result.success) {
-    console.log(result.error);
-    return 404;
-  }
-
-  changeName(result.data, 3)
-  changeToppings(result.data, 3)
-  changeImg(result.data, 3)
-  toggle(3)
-})
-
-pepperoni.addEventListener("click", async load => {
-  let response = await getData()
-  if(!response){
-    return 400
-  }
-  
-  const result = PizzaResponseScheme.safeParse(response.data);
-
-  if (!result.success) {
-    console.log(result.error);
-    return 404;
-  }
-
-  changeName(result.data, 4)
-  changeToppings(result.data, 4)
-  changeImg(result.data, 4)
-  toggle(4)
-})
-
-capricciose.addEventListener("click", async load => {
-  let response = await getData()
-  if(!response){
-    return 400
-  }
-  
-  const result = PizzaResponseScheme.safeParse(response.data);
-
-  if (!result.success) {
-    console.log(result.error);
-    return 404;
-  }
-
-  changeName(result.data, 5)
-  changeToppings(result.data, 5)
-  changeImg(result.data, 5)
-  toggle(5)
-})
-
-grandmas.addEventListener("click", async load => {
-  let response = await getData()
-  if(!response){
-    return 400
-  }
-  
-  const result = PizzaResponseScheme.safeParse(response.data);
-
-  if (!result.success) {
-    console.log(result.error);
-    return 404;
-  }
-
-  changeName(result.data, 6)
-  changeToppings(result.data, 6)
-  changeImg(result.data, 6)
-  toggle(6)
-})
-
-neapolitan.addEventListener("click", async load => {
-  let response = await getData()
-  if(!response){
-    return 400
-  }
-  
-  const result = PizzaResponseScheme.safeParse(response.data);
-
-  if (!result.success) {
-    console.log(result.error);
-    return 404;
-  }
-
-  changeName(result.data, 7)
-  changeToppings(result.data, 7)
-  changeImg(result.data, 7)
-  toggle(7)
-})
-
-/* const load = async () => {
-  let response = await getData()
-  if(!response){
-    return 400
-  }
-  
-  const result = PizzaResponseScheme.safeParse(response.data);
-
-  if (!result.success) {
-    console.log(result.error);
-    return 404;
-  }
-
-  changeName(result.data, 2)
-  toggle()
-
-} */

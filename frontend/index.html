@@ -9,23 +9,29 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Grandstander:wght@900&family=Space+Mono&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Grandstander:wght@900&family=Kosugi+Maru&family=Space+Mono&display=swap" rel="stylesheet">
+  
   </head>
   <body>
-
-    <h1>MARIO's GRANDMA</h1>
-
+    <header>
+      <img id="mario" src="dist/mario.svg">
+      <h1>MARIO's GRANDMA</h1>
+    </header>
+    
     <div id="container">
 
       <div id="pizza-list">
-
+        <p id="pizzas">PIZZAS:</p>
         <ul id="list">
-          <p id="margherita">Margherita</p>
-          <p id="quattro">Quattro Formaggi</p>
-          <p id="funghi">Funghi</p>
-          <p id="pepperoni">Pepperoni</p>
-          <p id="capricciose">Capricciose</p>
-          <p id="grandmas">Grandma's</p>
-          <p id="neapolitan">Neapolitan</p>
+          <p id="1" class="pizza">Margherita</p>
+          <p id="2" class="pizza">Quattro Formaggi</p>
+          <p id="3" class="pizza">Funghi</p>
+          <p id="4" class="pizza">Pepperoni</p>
+          <p id="5" class="pizza">Capricciose</p>
+          <p id="6" class="pizza">Grandma's</p>
+          <p id="7" class="pizza">Neapolitan</p>
         </ul>
 
       </div>
@@ -50,39 +56,36 @@
 
         <div id="input-field">
           <div></div>
-          <input type="number" min="0" name="number" id="number">
+          <input type="number" min="1" name="number" id="number" placeholder="0">
           <button id="add-to-order">ADD TO ORDER</button>
         </div>
 
       </div>
+      
+      <div id="order-field">
 
-    </div>
+        <div id="ordered-pizzas">
+          <p id="yp">Your Pizzas:</p>
+          <ul id="yp-description">
+          </ul>
+        </div>
 
+        <input id="name2" type="text" placeholder="your name">
+        <input id="zip" type="text" placeholder="zip code">
+        <input id="city" type="text" placeholder="city">
+        <input id="street" type="text" placeholder="street name">
+        <input id="house" type="text" placeholder="house number">
+        <input id="phone" type="text" placeholder="phone number">
+        <input id="email" type="text" placeholder="email address">
 
+        <button type="submit" id="so-button">SEND ORDER</button>
 
-
-
-
-
-    <div id="order-field">
-
-      <div id="ordered-pizzas">
-        <p id="yp">Your Pizzas</p>
-        <p id="yp-description">...</p>
-        <i></i>
       </div>
-
-      <input id="name" type="text" placeholder="your name">
-      <input id="zip" type="text" placeholder="zip code">
-      <input id="city" type="text" placeholder="city">
-      <input id="street" type="text" placeholder="street name">
-      <input id="house" type="text" placeholder="house number">
-      <input id="phone" type="text" placeholder="phone number">
-      <input id="email" type="text" placeholder="email address">
-
-      <button>SEND ORDER</button>
+  
 
     </div>
+
+
 
     <script type="module" src="/src/main.ts"></script>
 

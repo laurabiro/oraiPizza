@@ -3,7 +3,7 @@
     "id":1,
     "name":"margherita",
     "toppings": ["tomato sauce","tomato","basil","mozzarella"],
-    "url": "http://localhost:3333/pictures/all-pizza.jpeg"
+    "url": "http://localhost:3333/pictures/margherita.jpg"
 
 },
 {
@@ -19,7 +19,7 @@
     "id":3,
     "name":"funghi",
     "toppings": ["tomato sauce","tomato","mushroom","mozzarella"],
-    "url": "http://localhost:3333/pictures/all-pizza.jpeg"
+    "url": "http://localhost:3333/pictures/funghi.jpeg"
     
 },
 {
@@ -27,7 +27,7 @@
     "id":4,
     "name":"pepperoni",
     "toppings": ["tomato sauce","tomato","pepperoni","mozzarella"],
-    "url": "http://localhost:3333/pictures/all-pizza.jpeg"
+    "url": "http://localhost:3333/pictures/pepperoni.jpg"
 
 },
 {
@@ -42,7 +42,7 @@
     "id":6,
     "name":"grandma's",
     "toppings": ["tomato sauce","tomato","ham","egg","ruccola","mozzarella"],
-    "url": "http://localhost:3333/pictures/all-pizza.jpeg"
+    "url": "http://localhost:3333/pictures/grandmas.jpeg"
 
 },{
 
