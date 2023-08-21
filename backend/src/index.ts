@@ -26,26 +26,17 @@ const PizzaSchema = z.object ({
 server.get("/", async (req: Request, res: Response) => {
  
   const pizzaData = await JSON.parse(fs.readFileSync('database/pizza.json', 'utf-8'))
-  console.log(pizzaData)
-
-
-  const result = PizzaSchema.safeParse(req.query)
-  if (!result.success){
-    return res.json(pizzaData)
-  }
- 
-  return res.json(result.data)
- 
+  return res.json(pizzaData)
 })
 
 server.post('/', async (req: Request, res: Response) => {
   const fileData = req.body
-  console.log(req.body)
+  // zod
   try {
     const fileDataString = JSON.stringify(fileData, null, 2); // Adjust spacing as needed
     /* const uploadPath = __dirname + '/../database/' + 'profile.json'
  */
-    const uploadPath = __dirname + '/../database/' + `${req.body.name}.json`
+    const uploadPath = __dirname + '/../database/' + `${req.body.name.split(" ").join("") + new Date().getTime()}.json`
     fs.writeFileSync(uploadPath, fileDataString)
 
     res.send(fileDataString)
