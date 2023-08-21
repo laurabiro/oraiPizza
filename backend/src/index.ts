@@ -23,13 +23,13 @@ const PizzaSchema = z.object ({
 }).array()
 
 
-server.get("/", async (req: Request, res: Response) => {
+server.get("/api/pizza", async (req: Request, res: Response) => {
  
   const pizzaData = await JSON.parse(fs.readFileSync('database/pizza.json', 'utf-8'))
   return res.json(pizzaData)
 })
 
-server.post('/', async (req: Request, res: Response) => {
+server.post('/api/order', async (req: Request, res: Response) => {
   const fileData = req.body
   // zod
   try {
