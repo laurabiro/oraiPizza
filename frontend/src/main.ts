@@ -128,6 +128,7 @@ for (let i = 0; i < pizzas.length; i++) {
   const element = pizzas[i]
   element.addEventListener("click", pizzaListener)
 }
+
 // ORDER DETAILS:
 function loadDetails() {
   if (details.style.display === "none") {
@@ -140,7 +141,6 @@ function loadDetails() {
 addToOrder.addEventListener("click", loadDetails)
 
 // SAVE ORDER:
-
 const getDetails = () => {
   let i = 0
   let result:string[] = []
@@ -150,8 +150,10 @@ const getDetails = () => {
   }
   return result
 }
+
 const date = new Date().toUTCString();
 console.log(date)
+
 orderButton.addEventListener("click", async function() {
   const order = {
     "ordered pizzas":getDetails(),
